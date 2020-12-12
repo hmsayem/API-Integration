@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&display=swap');
 
 .login-form {
-    padding: 10% 30% 10%;
+    padding: 5% 35%;
 }
 
 .info-form {
-    padding: 10% 20% 10%;
+    padding: 5% 25%;
 }
 
 .form-group {
@@ -37,7 +37,7 @@ select:invalid {
     color: gray;
 }
 
-h1 {
+h1, .navbar-brand {
     color: #142850;
     font-family: 'Baloo 2', cursive;
 }
