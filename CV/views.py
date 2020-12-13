@@ -47,12 +47,8 @@ def submit_info(request):
             head = {'Authorization': 'token {}'.format(token)}
 
             URL = 'https://recruitment.fisdev.com/api/v1/recruiting-entities/'
-            #URL = 'https://recruitment.fisdev.com/api/v0/recruiting-entities/'
+            # URL = 'https://recruitment.fisdev.com/api/v0/recruiting-entities/'
             res = requests.post(url=URL, json=context, headers=head)
-
-            json_object = res.json()
-            json_formatted_str = json.dumps(json_object, indent=2)
-            print(json_formatted_str)
 
             if res.json()['success']:
 
