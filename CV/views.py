@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
 from .forms import InfoForm
-import requests, time, uuid
+import requests, time, uuid, json
 
 
 def login(request):
@@ -47,15 +46,23 @@ def submit_info(request):
             token = request.session['token']
             head = {'Authorization': 'token {}'.format(token)}
 
-            URL = 'https://recruitment.fisdev.com/api/v0/recruiting-entities/'
+            URL = 'https://recruitment.fisdev.com/api/v1/recruiting-entities/'
+            #URL = 'https://recruitment.fisdev.com/api/v0/recruiting-entities/'
             res = requests.post(url=URL, json=context, headers=head)
+
+            json_object = res.json()
+            json_formatted_str = json.dumps(json_object, indent=2)
+            print(json_formatted_str)
+
             if res.json()['success']:
+
                 cv_id = res.json()['cv_file']['id']
                 URL = 'https://recruitment.fisdev.com/api/file-object/' + str(cv_id) + '/'
                 file = {'file': data['file'].read()}
                 res = requests.put(URL, files=file, headers=head)
 
                 if res.json()['success']:
+                    request.session['success'] = True;
                     return redirect('success')
 
         return render(request, 'info.html', {'form': form})
@@ -64,12 +71,17 @@ def submit_info(request):
 def success(request):
     if 'token' not in request.session:
         return redirect('login')
+
+    if 'success' not in request.session:
+        return redirect('info')
+
     return render(request, 'success.html')
 
 
 def logout(request):
     try:
         del request.session['token']
-    except:
+        del request.session['success']
+    except KeyError:
         pass
     return redirect('login')
