@@ -1,5 +1,3 @@
-## Assignment for Junior Software Engineer Level I or II position
-
 ### About
 An application to submit the basic information and CV file using APIs.
 
