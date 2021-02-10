@@ -6,7 +6,7 @@ An application to submit the basic information and CV file using APIs.
 ##### Clone Project & Install Requirements
 > Make sure you have already installed python3 and git.
 ```
-git clone https://github.com/hmsayem/API-Integration.git && cd FB-Assignment
+git clone https://github.com/hmsayem/API-Integration.git && cd API-Integration
 pip install -r requirements.txt
 ```
 ##### Run Server
